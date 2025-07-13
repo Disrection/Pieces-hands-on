@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fdfefe;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fun Facts About Crocodiles!</h1>
+        <p id="funFact">Click the button to see a fun fact!</p>
+        <button id="generateFactButton">Generate Another Fun Fact</button>
+        <button id="shareTwitter">Share on Twitter</button>
+        <button id="shareLinkedIn">Share on LinkedIn</button>
+    </div>
+    <script>
+        const facts = [
+            "Crocodiles have been around for over 200 million years, making them one of the oldest living reptiles. They survived the mass extinction event that wiped out the dinosaurs.",
+            "Crocodiles have one of the strongest bites in the animal kingdom. The saltwater crocodile, in particular, can exert a bite force of over 3,700 pounds per square inch (psi).",
+            "The sex of crocodile hatchlings is determined by the temperature of the nest. Warmer temperatures tend to produce males, while cooler temperatures produce females.",
+            "Crocodiles have a unique four-chambered heart, similar to birds and mammals, which allows them to efficiently oxygenate their blood and stay submerged underwater for extended periods.",
+            "Crocodiles are known to communicate with each other through a variety of vocalizations, including growls, hisses, and even a sound known as 'chirping' made by hatchlings to alert their mothers.",
+            "Unlike many reptiles, crocodiles exhibit parental care. Female crocodiles guard their nests and assist their young in reaching the water after hatching.",
+            "Crocodiles can swim at speeds of up to 20 miles per hour (32 kilometers per hour) by using their powerful tails to propel themselves through the water.",
+            "Crocodiles have excellent night vision due to a layer of cells called the tapetum lucidum, which reflects light and enhances their ability to see in low-light conditions.",
+            "Saltwater crocodiles have specialized glands in their tongues that help them excrete excess salt, allowing them to live in both freshwater and saltwater environments.",
+            "Crocodiles can live for over 70 years, and they continue to grow throughout their lives. Some individuals can reach lengths of over 23 feet (7 meters) and weigh more than a ton."
+        ];
+
+        const factContainer = document.getElementById('funFact');
+        const generateFactButton = document.getElementById('generateFactButton');
+        const shareTwitterButton = document.getElementById('shareTwitter');
+        const shareLinkedInButton = document.getElementById('shareLinkedIn');
+
+        function getRandomFact() {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            return facts[randomIndex];
+        }
+
+        function updateFact() {
+            const fact = getRandomFact();
+            factContainer.textContent = fact;
+            updateColorScheme(fact);
+        }
+
+        function updateColorScheme(fact) {
+            if (fact.includes("reptiles")) {
+                document.body.style.backgroundColor = '#aed8ef'; // Light blue
+            } else {
+                document.body.style.backgroundColor = '#fefefe'; // Default
+            }
+        }
+
+        function shareOnTwitter(fact) {
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(fact)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnLinkedIn(fact) {
+            const url = `https://www.linkedin.com/sharing/share?text=${encodeURIComponent(fact)}`;
+            window.open(url, '_blank');
+        }
+
+        generateFactButton.addEventListener('click', updateFact);
+        shareTwitterButton.addEventListener('click', () => shareOnTwitter(factContainer.textContent));
+        shareLinkedInButton.addEventListener('click', () => shareOnLinkedIn(factContainer.textContent));
+
+        updateFact();
+    </script>
+</body>
+</html>
